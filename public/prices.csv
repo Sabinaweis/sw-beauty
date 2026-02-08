@@ -1,0 +1,87 @@
+service_id,service_type,name,duration_in_minutes,session,price_in_czk
+kosmetika,single,Hydratační ošetření pleti,60,1,1150
+kosmetika,single,Anti-age ošetření s kolagenem,60,1,1350
+kosmetika,single,Ošetření rozšířených pórů,60,1,1350
+kosmetika,single,Ošetření problematické pleti,60,1,1350
+kosmetika,single,Zklidňující ošetření pleti s propolisem,60,1,1490
+kosmetika,single,Premium ošetření s kyselinou hyaluronovou,60,1,1700
+kosmetika,single,Dermapen mikrojehličkování – Pleť,60,1,1800
+kosmetika,single,Dermapen mikrojehličkování – Rty,60,1,700
+kosmetika,single,Barvení obočí,15,1,200
+kosmetika,single,Barvení řas,15,1,200
+kosmetika,single,Lifting řas bez kosmetiky,45,1,1000
+kosmetika,single,Laminace obočí bez kosmetiky,45,1,600
+kosmetika,single,Laminace obočí s barvením bez kosmetiky,50,1,1000
+kosmetika,package,Laminace obočí + Lash Lifting řas bez kosmetiky,90,1,1500
+kosmetika,package,Lash lifting řas  cena s kosmetickým ošetřením ,90,1,800
+kosmetika,package,Laminace obočí cena s kosmetickým ošetřením ,75,1,500
+kosmetika,package,Laminace obočí s barvením  cena s kosmetickým ošetřením ,80,1,750
+kosmetika,package,Laminace obočí + Lash Lifting řas cena s kosmetickým ošetřením ,75,1,1000
+kosmetika,single,Depilace obličeje bez kosmetiky,20,1,550
+kosmetika,single,Depilace obličeje ke kosmetice,20,1,150
+kosmetika,single,Obličejová modelace + lifting kavitační stroj,60,1,700
+kosmetika,single,Miracletox- koreská dermokosmetika tekuté jehly,60,1,3500
+ems,single,"EMS Budování svalů – 1 partie (břiho/nohy/stehna/zadek/paže,lýtka)",30,1,900
+ems,single,EMS Budování svalů – 2 partie (kombinace břiho-nohy/stehna-zadek/paže-lýtka) lze libovolně kombinovat,30,1,1300
+ems,package,EMS Budování svalů – balíček 2 partie (5 ošetření) sleva 5%,30,5,6175
+ems,package,EMS Budování svalů – kombo 2 partie 60 minut,60,1,2100
+ems,package,EMS Budování svalů – balíček kombo 2 partie 60 minut(5 ošetření) sleva 10%,60,5,9450
+ems,package,EMS Budování svalů –balíček kombo 2 partie 60 minut(10 ošetření)sleva 15% ,60,10,17850
+ems,package,EMS Budování svalů – balíček 2 partie (8 ošetření) sleva 10%,30,8,9360
+hifu,single,HIFU 7D – celý obličej,60,1,5500
+hifu,package,HIFU 7D – obličej + krk,90,1,6500
+hifu,package,HIFU 7D – krk a podbradek,45,1,3900
+hifu,package,HIFU 7D – čelo a oční okolí,30,1,2900
+hifu,single,HIFU 7D – dolní část obličeje,60,1,4500
+hifu,single,HIFU 7D – oblast očí,30,1,2000
+hifu,single,HIFU formování břicha – celé břicho,60,1,6500
+hifu,single,HIFU formování břicha – horní část,60,1,3900
+hifu,single,HIFU formování břicha – dolní část,60,1,3900
+hifu,single,HIFU formování paží,60,1,4900
+hifu,single,HIFU formování stehen – jedna oblast,60,1,6500
+hifu,single,HIFU formování stehen – obě části,60,1,9000
+hifu,single,HIFU omlazení kolen,60,1,3500
+hifu,package,HIFU 7D – balíček obličej + krk + dekolt,60,1,8900
+hifu,package,HIFU tvarování těla – individuální balíček,60,1,12900
+endosphere,single,Endospheres – paže a předloktí,45,1,850
+endosphere,single,Endospheres – 1 partie,45,1,1050
+endosphere,package,Endospheres – balíček 5 ošetření (1 partie)sleva 10%,45,5,4725
+endosphere,package,Endospheres – balíček 10 ošetření (1 partie)sleva 15%,45,10,8925
+endosphere,single,Endospheres – 2 partie,60,1,1500
+endosphere,single,Endospheres – celé tělo,75,1,1900
+endosphere,package,Endospheres – balíček 6 ošetření (celé tělo) sleva 10%,75,6,10260
+endosphere,package,Endospheres – balíček 10 ošetření (celé tělo) sleva 15%,75,10,16150
+endosphere,single,Endospheres – obličej a dekolt,30,1,600
+endosphere,package,Endospheres – balíček 6 ošetření (obličej a dekolt) sleva 10%,30,6,3240
+endosphere,package,Endospheres – balíček 10 ošetření (obličej a dekolt) sleva 15%,30,10,5100
+kavitace,single,Kavitace – paže,60,1,900
+kavitace,single,Kavitace – břicho,60,1,1100
+kavitace,single,Kavitace – nohy,60,1,1100
+kavitace,single,Kavitace – hýždě,60,1,1100
+kavitace,single,Kavitace – 2 partie,100,1,2000
+lpg,single,LPG – celé tělo,60,1,1600
+vlasy,single,Prodloužení vlasů – nové nasazení,180,1,26
+vlasy,single,Prodloužení vlasů – posunutí,120,1,28
+vlasy,single,Rozčesání dredů půl hodiny,30,1,300
+hydrafacial,single,Basic klasické ošetření s použitím hydradermabraze a kyslíkové infůze,70,1,1650
+hydrafacial,single,"Standard klasické ošetření s použitím hydradermabraze, kyslíkové infůze a radiofrekvence",90,1,1900
+hydrafacial,single,"Premium  klasické ošetření s použitím hydradermabraze, kyslíkové infůze, radiofrekvence, biolifting a led terapie",120,1,2350
+laser epilace,single,Horní ret,15,1,500
+laser epilace,single,Brada,20,1,700
+laser epilace,single,Brada+horní ret,30,1,1300
+laser epilace,single,"Celý obličej( ret, kotlety, brada, mezi obočím, tváře)",45,1,2500
+laser epilace,single,Mezi obočím,15,1,400
+laser epilace,single,Šíje,30,1,1300
+laser epilace,single,"Ruce( zápěstí, prsty)",60,1,1500
+laser epilace,single,Záda(vrchní část),60,1,4300
+laser epilace,single,Podpaží,30,1,1250
+laser epilace,single,Třísla,60,1,1500
+laser epilace,single,Třísla+ intimní partie,75,1,3200
+laser epilace,single,Stehna ,60,1,3700
+laser epilace,single,Lýtka,60,1,3500
+laser epilace,single,Hrudník,45,1,3200
+laser epilace,single,Hýždě,45,1,2500
+laser epilace,single,Záda+ramena,90,1,5600
+laser epilace,single,Břicho,75,1,3200
+laser epilace,package,Balíček 6x ošetření sleva 10%,,,
+laser epilace,package,Balíček 7+ ošetření sleva 40% tj. 7.8 ... 40% sleva,,,

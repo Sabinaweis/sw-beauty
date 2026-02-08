@@ -1,0 +1,204 @@
+.loadingScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+}
+
+.loadingScreen.fadeOut {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+}
+
+.logo {
+  width: 280px;
+  height: auto;
+  color: #44403c;
+}
+
+@media (max-width: 640px) {
+  .logo {
+    width: 200px;
+  }
+}
+
+/* Letter path animations with staggered draw effect */
+.letterPath {
+  stroke: currentColor;
+  fill: transparent;
+  stroke-width: 1;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: drawLetter 1.8s ease-out forwards, fillIn 0.4s ease-out 1.4s forwards;
+  will-change: stroke-dashoffset, fill, stroke;
+}
+
+@media (max-width: 1023px) {
+  .letterPath {
+    stroke-dashoffset: 0;
+    fill: currentColor;
+    stroke: transparent;
+    animation: none;
+    will-change: auto;
+  }
+}
+
+.letter1 {
+  animation-delay: 0s, 1.4s;
+}
+
+.letter2 {
+  animation-delay: 0.08s, 1.48s;
+}
+
+.letter3 {
+  animation-delay: 0.16s, 1.56s;
+}
+
+.letter4 {
+  animation-delay: 0.24s, 1.64s;
+}
+
+.letter5 {
+  animation-delay: 0.32s, 1.72s;
+}
+
+.letter6 {
+  animation-delay: 0.40s, 1.80s;
+}
+
+.letter7 {
+  animation-delay: 0.48s, 1.88s;
+}
+
+.letter8 {
+  animation-delay: 0.56s, 1.96s;
+}
+
+.decorative {
+  animation-delay: 0.64s, 2.04s;
+}
+
+.decorative2 {
+  animation-delay: 0.72s, 2.12s;
+}
+
+.decorative3 {
+  animation-delay: 0.80s, 2.20s;
+}
+
+.decorative4 {
+  animation-delay: 0.88s, 2.28s;
+}
+
+@keyframes drawLetter {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fillIn {
+  from {
+    fill: transparent;
+    stroke: currentColor;
+  }
+
+  to {
+    fill: currentColor;
+    stroke: transparent;
+  }
+}
+
+/* Subtle pulse ring behind logo */
+.pulseRing {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 1px solid rgba(68, 64, 60, 0.1);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@media (max-width: 640px) {
+  .pulseRing {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.1;
+  }
+}
+
+/* Loading text */
+.loadingText {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #78716c;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: fadeInOut 1.5s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Progressive enhancement - reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .letterPath {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    fill: currentColor;
+    stroke: transparent;
+    animation: none;
+  }
+
+  .pulseRing {
+    animation: none;
+    opacity: 0.2;
+  }
+
+  .loadingText {
+    animation: none;
+    opacity: 0.7;
+  }
+
+  .loadingScreen.fadeOut {
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+  }
+}
