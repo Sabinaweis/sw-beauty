@@ -26,6 +26,15 @@ export function bookingOwnerEmailTemplate(
   note: string,
   confirmUrl: string
 ): string {
+  const safeService = escapeHtml(service);
+  const safePackage = escapeHtml(packageName);
+  const safeDate = escapeHtml(date);
+  const safeTime = escapeHtml(time);
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safePhone = escapeHtml(phone);
+  const safeNote = escapeHtml(note);
+
   return `
     <!DOCTYPE html>
     <html>
@@ -47,9 +56,13 @@ export function bookingOwnerEmailTemplate(
           <div>
             <h2>Dobrý den,</h2>
             <p>Přišla nová žádost o rezervaci.</p>
-            <p><strong>Služba:</strong> ${escapeHtml(service)}</p>
-            <p><strong>Termín:</strong> ${escapeHtml(date)} v ${escapeHtml(time)}</p>
-            <p><strong>Klient:</strong> ${escapeHtml(name)}</p>
+            <p><strong>Služba:</strong> ${safeService}</p>
+            ${safePackage ? `<p><strong>Balíček:</strong> ${safePackage}</p>` : ''}
+            <p><strong>Termín:</strong> ${safeDate} v ${safeTime}</p>
+            <p><strong>Klient:</strong> ${safeName}</p>
+            <p><strong>Email:</strong> ${safeEmail}</p>
+            <p><strong>Telefon:</strong> ${safePhone}</p>
+            ${safeNote ? `<p><strong>Poznámka:</strong> ${safeNote}</p>` : ''}
             <a href="${confirmUrl}" class="button">Potvrdit termín</a>
           </div>
         </div>
@@ -65,14 +78,27 @@ export function bookingClientInitialEmailTemplate(
   date: string,
   time: string
 ): string {
+  const safeName = escapeHtml(name);
+  const safeService = escapeHtml(service);
+  const safePackage = escapeHtml(packageName);
+  const safeDate = escapeHtml(date);
+  const safeTime = escapeHtml(time);
+
   return `
     <!DOCTYPE html>
     <html>
       <body>
-        <h1>Děkujeme, ${escapeHtml(name)}</h1>
+        <h1>Děkujeme, ${safeName}</h1>
         <p>Vaše žádost o rezervaci byla odeslána.</p>
-        <p><strong>Služba:</strong> ${escapeHtml(service)}</p>
-        <p><strong>Termín:</strong> ${escapeHtml(date)} v ${escapeHtml(time)}</p>
+        <p><strong>Služba:</strong> ${safeService}</p>
+        ${safePackage ? `<p><strong>Balíček:</strong> ${safePackage}</p>` : ''}
+        <p><strong>Termín:</strong> ${safeDate} v ${safeTime}</p>
+        <hr style="margin: 24px 0; border: 0; border-top: 1px solid #e7e5e4;" />
+        <h2 style="margin: 0 0 8px; font-size: 18px;">Platební údaje</h2>
+        <p style="margin: 4px 0;"><strong>Příjemce:</strong> SW Beauty (Weisbergerova)</p>
+        <p style="margin: 4px 0;"><strong>IBAN:</strong> CZ51 0800 0000 0066 5709 5339</p>
+        <p style="margin: 4px 0;"><strong>SWIFT:</strong> GIBACZPX</p>
+        <p style="margin: 4px 0;"><strong>Bankovní účet:</strong> 6657095339/0800</p>
       </body>
     </html>
   `;
@@ -85,13 +111,26 @@ export function bookingClientConfirmedEmailTemplate(
   date: string,
   time: string
 ): string {
+  const safeName = escapeHtml(name);
+  const safeService = escapeHtml(service);
+  const safePackage = escapeHtml(packageName);
+  const safeDate = escapeHtml(date);
+  const safeTime = escapeHtml(time);
+
   return `
     <!DOCTYPE html>
     <html>
       <body>
         <h1>✓ Termín potvrzen</h1>
-        <p>Děkujeme, ${escapeHtml(name)}. Váš termín ${escapeHtml(date)} v ${escapeHtml(time)} byl potvrzen.</p>
-        <p><strong>Služba:</strong> ${escapeHtml(service)}</p>
+        <p>Děkujeme, ${safeName}. Váš termín ${safeDate} v ${safeTime} byl potvrzen.</p>
+        <p><strong>Služba:</strong> ${safeService}</p>
+        ${safePackage ? `<p><strong>Balíček:</strong> ${safePackage}</p>` : ''}
+        <hr style="margin: 24px 0; border: 0; border-top: 1px solid #e7e5e4;" />
+        <h2 style="margin: 0 0 8px; font-size: 18px;">Platební údaje</h2>
+        <p style="margin: 4px 0;"><strong>Příjemce:</strong> SW Beauty (Weisbergerova)</p>
+        <p style="margin: 4px 0;"><strong>IBAN:</strong> CZ51 0800 0000 0066 5709 5339</p>
+        <p style="margin: 4px 0;"><strong>SWIFT:</strong> GIBACZPX</p>
+        <p style="margin: 4px 0;"><strong>Bankovní účet:</strong> 6657095339/0800</p>
       </body>
     </html>
   `;

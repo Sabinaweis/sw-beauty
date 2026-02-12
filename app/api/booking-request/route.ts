@@ -36,7 +36,15 @@ export async function POST(request: NextRequest) {
       ...(note && { note }),
     });
 
-    const confirmUrl = `${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/confirm-booking?${params.toString()}`;
+    const configuredBaseUrl = process.env.NEXT_PUBLIC_BASE_URL?.replace(/\/$/, '');
+    const forwardedProto = request.headers.get('x-forwarded-proto');
+    const forwardedHost = request.headers.get('x-forwarded-host') || request.headers.get('host');
+    const requestBaseUrl = forwardedHost
+      ? `${forwardedProto || 'https'}://${forwardedHost}`
+      : new URL(request.url).origin;
+    const baseUrl = configuredBaseUrl || requestBaseUrl;
+
+    const confirmUrl = `${baseUrl}/api/confirm-booking?${params.toString()}`;
 
     // Send emails via Resend
     if (!RESEND_API_KEY) {
