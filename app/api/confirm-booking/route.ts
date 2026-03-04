@@ -4,6 +4,17 @@ import { bookingClientConfirmedEmailTemplate, bookingOwnerConfirmedEmailTemplate
 import { Resend } from 'resend';
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function parseBookingDate(dateValue: string): Date | null {
+  const parsed = new Date(`${dateValue}T12:00:00`);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+}
+
+function isWeekend(date: Date): boolean {
+  const day = date.getDay();
+  return day === 0 || day === 6;
+}
 
 // Generování ICS souboru pro kalendář
 function generateICS(service: string, packageName: string, date: string, time: string, clientName: string, clientPhone: string, isOwner = false) {
@@ -303,33 +314,58 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const finalDate = body.finalDate;
-    const finalTime = body.finalTime;
+    const name = String(body.name || '').trim();
+    const email = String(body.email || '').trim().toLowerCase();
+    const phone = String(body.phone || '').trim();
+    const service = String(body.service || '').trim();
+    const packageName = String(body.packageName || '').trim();
+    const originalDate = String(body.originalDate || '').trim();
+    const originalTime = String(body.originalTime || '').trim();
+    const finalDate = String(body.finalDate || '').trim();
+    const finalTime = String(body.finalTime || '').trim();
+    const key = String(body.key || '').trim();
+
+    if (!name || !email || !phone || !service || !originalDate || !originalTime || !finalDate || !finalTime || !key) {
+      return NextResponse.json({ error: 'Chybí povinné údaje.' }, { status: 400 });
+    }
+
+    if (!EMAIL_REGEX.test(email)) {
+      return NextResponse.json({ error: 'Neplatný email klienta.' }, { status: 400 });
+    }
+
+    const parsedFinalDate = parseBookingDate(finalDate);
+    if (!parsedFinalDate) {
+      return NextResponse.json({ error: 'Neplatné finální datum.' }, { status: 400 });
+    }
+
+    if (isWeekend(parsedFinalDate)) {
+      return NextResponse.json({ error: 'Rezervace o víkendu nejsou dostupné.' }, { status: 400 });
+    }
 
     // Verify the security hash with original date/time
-    const expectedHash = generateHash(body.email, body.originalDate, body.originalTime);
-    if (body.key !== expectedHash) {
+    const expectedHash = generateHash(email, originalDate, originalTime);
+    if (key !== expectedHash) {
       return NextResponse.json({ error: 'Invalid key' }, { status: 403 });
     }
 
     // Generování ICS souborů
     const clientICS = generateICS(
-      body.service,
-      body.packageName,
+      service,
+      packageName,
       finalDate,
       finalTime,
-      body.name,
-      body.phone,
+      name,
+      phone,
       false // pro klienta
     );
 
     const ownerICS = generateICS(
-      body.service,
-      body.packageName,
+      service,
+      packageName,
       finalDate,
       finalTime,
-      body.name,
-      body.phone,
+      name,
+      phone,
       true // pro majitelku
     );
 
@@ -341,46 +377,61 @@ export async function POST(request: NextRequest) {
     const resend = new Resend(RESEND_API_KEY);
 
     // Send confirmation email to client with ICS attachment
-    await resend.emails.send({
+    const clientEmail = await resend.emails.send({
       from: 'SW Beauty <noreply@swbeauty.cz>',
-      to: body.email,
+      to: email,
       subject: 'Potvrzení termínu - SW Beauty',
       html: bookingClientConfirmedEmailTemplate(
-        body.name,
-        body.service,
-        body.packageName,
+        name,
+        service,
+        packageName,
         finalDate,
         finalTime
       ),
       attachments: [
         {
           filename: 'rezervace-sw-beauty.ics',
-          content: Buffer.from(clientICS).toString('base64')
+          content: Buffer.from(clientICS).toString('base64'),
+          contentType: 'text/calendar; charset=utf-8'
         }
       ]
     });
 
+    if (clientEmail.error) {
+      console.error('Failed to send client booking confirmation email:', clientEmail.error);
+      return NextResponse.json({ error: 'Nepodařilo se odeslat potvrzení klientovi.' }, { status: 502 });
+    }
+
     // Send confirmation email to owner with ICS attachment
-    await resend.emails.send({
+    const ownerEmail = await resend.emails.send({
       from: 'SW Beauty <noreply@swbeauty.cz>',
       to: 'info@swbeauty.cz',
-      subject: `Potvrzeno: ${body.name} - ${body.service} (${finalDate} ${finalTime})`,
+      subject: `Potvrzeno: ${name} - ${service} (${finalDate} ${finalTime})`,
       html: bookingOwnerConfirmedEmailTemplate(
-        body.name,
-        body.email,
-        body.phone,
-        body.service,
-        body.packageName,
+        name,
+        email,
+        phone,
+        service,
+        packageName,
         finalDate,
         finalTime
       ),
       attachments: [
         {
           filename: 'rezervace.ics',
-          content: Buffer.from(ownerICS).toString('base64')
+          content: Buffer.from(ownerICS).toString('base64'),
+          contentType: 'text/calendar; charset=utf-8'
         }
       ]
     });
+
+    if (ownerEmail.error) {
+      console.error('Failed to send owner booking confirmation email:', ownerEmail.error);
+      return NextResponse.json({
+        success: true,
+        warning: 'Klientský email byl odeslán, interní potvrzení se nepodařilo doručit.',
+      });
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

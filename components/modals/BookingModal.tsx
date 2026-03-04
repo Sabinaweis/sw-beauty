@@ -73,10 +73,20 @@ export default function BookingModal({ initialData }: BookingModalProps) {
     };
   }, [initialData, isInitialized]);
 
-  const getTomorrowDate = (): Date => {
+  const getEarliestBookableDate = (): Date => {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
     return tomorrow;
+  };
+
+  const isWeekend = (date: Date): boolean => {
+    const day = date.getDay();
+    return day === 0 || day === 6;
+  };
+
+  const isDateDisabled = (date: Date): boolean => {
+    return date < getEarliestBookableDate() || isWeekend(date);
   };
 
   const times = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
@@ -251,7 +261,7 @@ export default function BookingModal({ initialData }: BookingModalProps) {
                     mode="single"
                     selected={selectedDate}
                     onSelect={setSelectedDate}
-                    disabled={(date) => date < getTomorrowDate()}
+                    disabled={isDateDisabled}
                     locale={cs}
                     className="border border-stone-200 !p-2 [--cell-size:2.25rem] md:[--cell-size:1.75rem]"
                   />
@@ -276,6 +286,9 @@ export default function BookingModal({ initialData }: BookingModalProps) {
                   </div>
                 </div>
               </div>
+              <p className="mt-3 text-xs text-stone-600 font-geist">
+                Rezervace jsou dostupné od pondělí do pátku.
+              </p>
             </div>
           )}
 
