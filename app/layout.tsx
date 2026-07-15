@@ -23,8 +23,8 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   title: 'SW Beauty Hodonín | HIFU, Endospheres, Kosmetika | Luxusní péče',
-  description: 'Luxusní kosmetický salon v Hodoníně. HIFU 7D lifting, Endospheres terapie, Hydrafacial, prodlužování vlasů. Online rezervace termínů. U Cihelny 1326/4.',
-  keywords: 'kosmetika Hodonín, HIFU lifting, Endospheres, Hydrafacial, prodlužování vlasů, kosmetický salon, laminace obočí, lifting řas',
+  description: 'Luxusní kosmetický salon v Hodoníně. HIFU 7D lifting, Endospheres terapie, Hydrodermabraze, prodlužování vlasů. Online rezervace termínů. U Cihelny 1326/4.',
+  keywords: 'kosmetika Hodonín, HIFU lifting, Endospheres, Hydrodermabraze, prodlužování vlasů, kosmetický salon, laminace obočí, lifting řas',
   openGraph: {
     type: 'website',
     url: 'https://swbeauty.cz',
