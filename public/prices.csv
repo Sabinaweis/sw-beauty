@@ -63,9 +63,9 @@ lpg,single,LPG – celé tělo,60,1,1600
 vlasy,single,Prodloužení vlasů – nové nasazení,180,1,26
 vlasy,single,Prodloužení vlasů – posunutí,120,1,28
 vlasy,single,Rozčesání dredů půl hodiny,30,1,300
-hydrafacial,single,Basic klasické ošetření s použitím hydradermabraze a kyslíkové infůze,70,1,1650
-hydrafacial,single,"Standard klasické ošetření s použitím hydradermabraze, kyslíkové infůze a radiofrekvence",90,1,1900
-hydrafacial,single,"Premium  klasické ošetření s použitím hydradermabraze, kyslíkové infůze, radiofrekvence, biolifting a led terapie",120,1,2350
+Hydrodermabraze,single,Basic klasické ošetření s použitím hydradermabraze a kyslíkové infůze,70,1,1650
+Hydrodermabraze,single,"Standard klasické ošetření s použitím hydradermabraze, kyslíkové infůze a radiofrekvence",90,1,1900
+Hydrodermabraze,single,"Premium  klasické ošetření s použitím hydradermabraze, kyslíkové infůze, radiofrekvence, biolifting a led terapie",120,1,2350
 laser epilace,single,Horní ret,15,1,500
 laser epilace,single,Brada,20,1,700
 laser epilace,single,Brada+horní ret,30,1,1300
