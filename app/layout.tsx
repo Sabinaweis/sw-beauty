@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { Cormorant_Garamond, Geist } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 
@@ -68,6 +69,7 @@ export default function RootLayout({
     >
       <body className="antialiased selection:bg-stone-200 selection:text-stone-900 text-stone-800 relative">
         {children}
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
